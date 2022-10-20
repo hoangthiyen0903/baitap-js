@@ -1,1 +1,42 @@
-styles.css
+* {padding: 0; margin: 0;}
+body {font-family: sans-serif; font-size: 14px; color: #333;}
+
+.refresh{
+	background-color: #D9544F;
+}
+.del{
+	background-color: #EFAD4D;
+}
+.operation{
+	background-color: #5BB85D;
+}
+.number{
+	background-color: #418BCA;
+}
+.dot, .equal{
+	background-color: #5bc0de;
+}
+button{
+	width: 300px;
+	height: 40px;
+	margin-top: 5px;
+	font-size: 16px;
+}
+
+.calculator{
+	margin: 20px auto;
+	width: 910px;
+}
+.box-calculation, .box-result{
+	width: 894px;
+	border: 1px solid #666;
+	padding: 5px 7px;
+	font-size: 16px;
+}
+.box-calculation{
+	border-bottom: none;
+}
+.box-result{
+	border-top: none;
+	text-align: right;
+}
