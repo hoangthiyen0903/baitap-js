@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<style>
+		.form-horizontal{
+			border: 1px solid black;
+			padding: 10px 10px;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-6 col-md-offset-3">
+			<form id="form_register" class="form-horizontal" method="POST">
+				<div class="form-group">
+					<label for="inputUsername" class="col-sm-4 control-label">Tên đăng nhập</label>
+					<div class="col-sm-8">
+						<input type="text" name="username" class="form-control" id="inputUsername">
+						<span id="inputUsernameErr" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-sm-4 control-label">Mật khẩu:</label>
+					<div class="col-sm-8">
+						<input type="password" name="password" class="form-control" id="inputPassword">
+						<span id="inputPasswordErr" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputRePassword" class="col-sm-4 control-label">Nhập lại mật khẩu:</label>
+					<div class="col-sm-8">
+						<input type="password" name="re_password" class="form-control" id="inputRePassword">
+						<span id="inputRePasswordErr" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-4 control-label">Email:</label>
+					<div class="col-sm-8">
+						<input type="text" name="email" class="form-control" id="inputEmail">
+						<span id="inputEmailErr" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPhone" class="col-sm-4 control-label">Điện thoại:</label>
+					<div class="col-sm-8">
+						<input type="text" name="phone" class="form-control" id="inputPhone">
+						<span id="inputPhoneErr" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress" class="col-sm-4 control-label">Địa chỉ:</label>
+					<div class="col-sm-8">
+						<input type="text" name="address" class="form-control" id="inputAddress">
+						<span id="inputAddressErr" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-8">
+						<button type="submit" class="btn btn-default">Đăng ký</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<script>
+		var regexEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+		$(document).ready(function(){
+			$('#form_register').submit(function(event){
+				var isValid = true;
+
+				var inputUsername = $('#inputUsername').val();
+				if(inputUsername.length <= 4){
+					$('#inputUsernameErr').text('Tên đăng nhập phải lớn hơn 4 ký tự');
+					isValid = false;
+				}else{
+					$('#inputUsernameErr').text('');
+				}
+
+				var inputPassword = $('#inputPassword').val();
+				if(inputPassword == ""){
+					$('#inputPasswordErr').text('Mật khẩu không được trống');
+					isValid = false;
+				}else{
+					$('#inputPasswordErr').text('');
+				}
+
+				var inputRePassword = $('#inputRePassword').val();
+				if(inputRePassword == ""){
+					$('#inputRePasswordErr').text('Mật khẩu không được trống');
+					isValid = false;
+				}else if(inputPassword != inputRePassword){
+					$('#inputRePasswordErr').text('Mật khẩu nhập lại phải giống mật khẩu ở trên');
+					isValid = false;
+				}else{
+					$('#inputRePasswordErr').text('');
+				}
+
+				var inputEmail = $('#inputEmail').val();
+				if(inputEmail == ""){
+					$('#inputEmailErr').text('Email không được trống');
+					isValid = false;
+				}else if(!inputEmail.match(regexEmail)){
+					$('#inputEmailErr').text('Email không đúng định dạng.');
+					isValid = false;
+				}else{
+					$('#inputEmailErr').text('');
+				}
+
+				var inputPhone = $('#inputPhone').val();
+				//if(isNaN(parseInt(inputPhone))){
+					if(!$.isNumeric(inputPhone)){
+						$('#inputPhoneErr').text('Điện thoại phải nhập số.');
+						isValid = false;
+					}else{
+						$('#inputPhoneErr').text('');
+					}
+
+
+					if(!isValid){
+						event.preventDefault();
+					}else{
+						alert('Đăng ký thành công');
+					}
+
+				});
+		});
+	</script>
+</body>
+</html>
